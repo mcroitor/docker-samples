@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  nginx-balancer:
+    build: ./balancer/
+    ports:
+      - "8080:80"
+    networks: 
+      - backend
+      - frontend
+  nginx-node-1:
+    build: ./node/
+    volumes:
+      - ./site/:/var/www/html
+    depends_on:
+      - nginx-balancer
+    networks: 
+      - backend
+  nginx-node-2:
+    build: ./node/
+    volumes:
+      - ./site/:/var/www/html
+    depends_on:
+      - nginx-balancer
+    networks: 
+      - backend
+  nginx-node-3:
+    build: ./node/
+    volumes:
+      - ./site/:/var/www/html
+    depends_on:
+      - nginx-balancer
+    networks: 
+      - backend
+networks:
+  # The presence of these objects is sufficient to define them
+  frontend: {}
+  backend: {}

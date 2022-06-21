@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  httpd:
+    build: ./httpd/
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+      - APACHE_LOG_DIR=/var/log/apache2
+      - APACHE_LOCK_DIR=/var/lock/apache2
+      - APACHE_PID_FILE=/var/run/apache2.pid
+      - APACHE_RUN_DIR=/var/run/apache2
+    ports:
+      - "8080:80"
+    volumes:
+      - ./site/:/var/www/html
+    networks: 
+      - backend
+      - frontend
+  php-fpm:
+    build: ./php-fpm/
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./site/:/var/www/html
+    depends_on:
+      - httpd
+    networks: 
+      - backend
+networks:
+  # The presence of these objects is sufficient to define them
+  frontend: {}
+  backend: {}

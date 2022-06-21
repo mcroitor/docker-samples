@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  nginx:
+    build: "./nginx/"
+    ports:
+      - "80:80"
+    networks:
+      - frontend
+      - backend
+  php-fpm:
+    build: "./php-fpm/"
+    ports:
+      - "9000:9000"
+    networks:
+      - backend
+  mariadb:
+    build: "./mariadb/"
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    volumes:
+      - ./data/:/var/lib/mysql
+networks:
+  frontend: {}
+  backend: {}
