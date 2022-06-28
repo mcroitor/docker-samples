@@ -1,17 +1,11 @@
-# Sample03
+# Sample05
 
-Simple web server, based on Apache HTTP Server + PHP-FPM
+An example of nginx cluster. In the front is a balancer node, in the back are 3 nginx + php-fpm servers.
 
-## Build
-
-```
-docker-compose build --no-cache --force-rm
-```
-
-## Run
+## (Re)Build + Run
 
 ```
-docker-compose up -d
+make
 ```
 
 ## Stop
