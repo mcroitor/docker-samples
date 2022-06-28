@@ -1,5 +1,7 @@
 APP_NAME=nginx-node
 
+.PHONY: all
+
 all: build
 
 build:

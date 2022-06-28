@@ -5,31 +5,29 @@ services:
     build: ./balancer/
     ports:
       - "8080:80"
+    depends_on:
+      - nginx-node-1
+      - nginx-node-2
+      - nginx-node-3
     networks: 
       - backend
       - frontend
   nginx-node-1:
     build: ./node/
     volumes:
-      - ./site/:/var/www/html
-    depends_on:
-      - nginx-balancer
+      - ./node/site:/var/www/html
     networks: 
       - backend
   nginx-node-2:
     build: ./node/
     volumes:
-      - ./site/:/var/www/html
-    depends_on:
-      - nginx-balancer
+      - ./node/site:/var/www/html
     networks: 
       - backend
   nginx-node-3:
     build: ./node/
     volumes:
-      - ./site/:/var/www/html
-    depends_on:
-      - nginx-balancer
+      - ./node/site:/var/www/html
     networks: 
       - backend
 networks:
