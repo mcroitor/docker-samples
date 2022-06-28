@@ -1,3 +1,5 @@
+Sample of nginx + php-fpm server. You can use `make` tool for building or docker commands.
+
 ## build
 
 ```bash
