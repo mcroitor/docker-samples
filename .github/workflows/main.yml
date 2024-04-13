@@ -19,7 +19,7 @@ jobs:
         run: docker create --name test-container --volume database:/var/www/db containers07-base
 # Copy tests to the container `test-container`
       - name: Copy tests to the container
-        run: docker cp ./sample06/tests test-container:/var/www
+        run: docker cp ./sample06/tests test-container:/var/www/html
 # Run tests in the container `test-container`
       - name: Up the container
         run: docker start test-container
