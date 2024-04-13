@@ -54,7 +54,7 @@ function testDbRead()
 
     $db = new Database($config['db']['path']);
     $data = $db->Read('page', 1);
-    return assertExpression($data[0]['title'] == 'Home');
+    return assertExpression($data[0]['title'] == 'Page 1');
 }
 
 // test 5: test delete method
