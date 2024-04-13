@@ -1,0 +1,6 @@
+# ignore archives
+*.zip
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.lzma
