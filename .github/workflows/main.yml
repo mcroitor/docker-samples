@@ -11,18 +11,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-# switch directory to `sample06`
-      - name: Go to the build project
-        run: cd sample06
 # build image `containers07-base` from Dockerfile
       - name: Build the Docker image
-        run: docker build -t containers07-base .
+        run: docker build -t containers07-base ./sample06
 # Create container `test-container` for testing
       - name: Create `test-container`
         run: docker create --name test-container --volume database:/var/www/db containers07-base
 # Copy tests to the container `test-container`
       - name: Copy tests to the container
-        run: docker cp ./tests test-container:/var/www
+        run: docker cp ./sample06/tests test-container:/var/www
 # Run tests in the container `test-container`
       - name: Up the container
         run: docker start test-container
