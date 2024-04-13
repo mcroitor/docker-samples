@@ -32,7 +32,7 @@ function testDbCount()
     global $config;
     $count = 0;
     $db = new Database($config['db']['path']);
-    $count = $db->Count('pages');
+    $count = $db->Count('page');
     return assertExpression($count == 3);
 }
 
@@ -42,9 +42,19 @@ function testDbCreate()
     global $config;
 
     $db = new Database($config['db']['path']);
-    $db->Create('pages', ['title' => 'Test', 'content' => 'Test']);
-    $count = $db->Count('pages');
+    $db->Create('page', ['title' => 'Test', 'content' => 'Test']);
+    $count = $db->Count('page');
     return assertExpression($count == 4);
+}
+
+function testDbDelete()
+{
+    global $config;
+
+    $db = new Database($config['db']['path']);
+    $db->Delete('page', 4);
+    $count = $db->Count('page');
+    return assertExpression($count == 3);
 }
 
 // test 4: test read method
@@ -53,7 +63,7 @@ function testDbRead()
     global $config;
 
     $db = new Database($config['db']['path']);
-    $data = $db->Read('pages', 1);
+    $data = $db->Read('page', 1);
     return assertExpression($data[0]['title'] == 'Home');
 }
 
@@ -64,6 +74,7 @@ $tests->add('Database connection', 'testDbConnection');
 $tests->add('Database count', 'testDbCount');
 $tests->add('Database create', 'testDbCreate');
 $tests->add('Database read', 'testDbRead');
+$tests->add('Database delete', 'testDbDelete');
 
 // run tests
 $tests->run();
