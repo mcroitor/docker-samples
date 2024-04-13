@@ -24,7 +24,7 @@ jobs:
       - name: Up the container
         run: docker start test-container
       - name: Run tests
-        run: docker exec test-container php /var/www/html/tests/test.php
+        run: docker exec test-container php /var/www/html/tests/tests.php
 # Stop the container `test-container`
       - name: Stop the container
         run: docker stop test-container
