@@ -1,19 +1,23 @@
 <?php
 
-function message($type, $message) {
+function message($type, $message)
+{
     $time = date('Y-m-d H:i:s');
     echo "{$time} [{$type}] {$message}" . PHP_EOL;
 }
 
-function info($message) {
+function info($message)
+{
     message('INFO', $message);
 }
 
-function error($message) {
+function error($message)
+{
     message('ERROR', $message);
 }
 
-function assertExpression($expression, $pass = 'Pass', $fail = 'Fail'): bool {
+function assertExpression($expression, $pass = 'Pass', $fail = 'Fail'): bool
+{
     if ($expression) {
         info($pass);
         return true;
@@ -22,26 +26,39 @@ function assertExpression($expression, $pass = 'Pass', $fail = 'Fail'): bool {
     return false;
 }
 
-class TestFramework {
+class TestFramework
+{
     private $tests = [];
     private $success = 0;
 
-    public function add($name, $test) {
+    public function add($name, $test)
+    {
         $this->tests[$name] = $test;
     }
 
-    public function run() {
+    public function run()
+    {
         $count = 1;
         foreach ($this->tests as $name => $test) {
             info("{$count} Running test {$name}");
-            if ($test()) {
-                ++ $this->success;
+            try {
+                if ($test()) {
+                    ++$this->success;
+                    info('Pass');
+                }
+                else {
+                    error('Fail');
+                }
+            } catch (Exception $e) {
+                error($e->getMessage());
+                error('Fail');
             }
-            ++ $count;
+            ++$count;
         }
     }
 
-    public function getResult() {
+    public function getResult()
+    {
         return "{$this->success} / " . count($this->tests);
     }
 }
