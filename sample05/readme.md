@@ -1,15 +1,21 @@
 # Sample05
 
-An example of nginx cluster. In the front is a balancer node, in the back are 3 nginx + php-fpm servers.
+Cluster of nginx servers with a load balancer. The load balancer is a nginx server that forwards the requests to the other 3 nginx servers.
 
-## (Re)Build + Run
+## Build
 
+```bash
+docker-compose build --no-cache --force-rm
 ```
-make
+
+## Run
+
+```bash
+docker-compose up -d
 ```
 
 ## Stop
 
-```
+```bash
 docker-compose down
 ```
