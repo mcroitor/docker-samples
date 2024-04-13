@@ -47,16 +47,6 @@ function testDbCreate()
     return assertExpression($count == 4);
 }
 
-function testDbDelete()
-{
-    global $config;
-
-    $db = new Database($config['db']['path']);
-    $db->Delete('page', 4);
-    $count = $db->Count('page');
-    return assertExpression($count == 3);
-}
-
 // test 4: test read method
 function testDbRead()
 {
@@ -67,6 +57,16 @@ function testDbRead()
     return assertExpression($data[0]['title'] == 'Home');
 }
 
+// test 5: test delete method
+function testDbDelete()
+{
+    global $config;
+
+    $db = new Database($config['db']['path']);
+    $db->Delete('page', 4);
+    $count = $db->Count('page');
+    return assertExpression($count == 3);
+}
 
 // add tests
 $tests->add('Database exists', 'testDatabaseExists');
